@@ -72,7 +72,7 @@ function ComplexApp() {
             <a href="#">HOME</a>
           </li>
           <li>
-            <a href="#">ABOUT</a>
+            <a href="http://localhost:3000/about" target="blank">ABOUT</a>
           </li>
           <li>
             <a href="#">SERVICE</a>
@@ -208,16 +208,131 @@ function ComplexApp() {
         </div>
       </section>
 
-      <section>
-        <div className="scrolls">
-          <div className="scrolls1">dada</div>
-          <br />
-          <div className="scrolls2">daesac</div>
-          <br />
-          <div className="scrolls3">eadscs</div>
-          <br />
+      {/* ACHIEVEMENTS SECTION */}
+      <section className="achievements-section">
+        <div className="achievements-inner">
+          <h2>Our Achievements</h2>
+          <div className="achievements-grid">
+            <div className="achievement">
+              <h3>250+</h3>
+              <p>Projects Completed</p>
+            </div>
+            <div className="achievement">
+              <h3>120+</h3>
+              <p>Happy Clients</p>
+            </div>
+            <div className="achievement">
+              <h3>50+</h3>
+              <p>Creative Members</p>
+            </div>
+            <div className="achievement">
+              <h3>10+</h3>
+              <p>Years of Experience</p>
+            </div>
+          </div>
         </div>
       </section>
+
+      {/* BLOG SECTION */}
+      <section className="blog-section">
+        <h2>Latest From Our Blog</h2>
+        <br />
+        <br />
+        <div className="blog-grid">
+          <div className="blog-card">
+            <img src="src/images/gallery5.jpg" alt="Blog 1" />
+            <div className="blog-content">
+              <h3>Designing with Purpose</h3>
+              <p>
+                Discover how design thinking transforms everyday products into
+                meaningful experiences.
+              </p>
+              <button className="blog-btn">
+                {" "}
+                <a href="#">Read More →</a>
+              </button>
+            </div>
+          </div>
+
+          <div className="blog-card">
+            <img src="src/images/gallery6.jpg" alt="Blog 2" />
+            <div className="blog-content">
+              <h3>Tech Meets Art</h3>
+              <p>
+                Explore how technology and creativity blend to shape the digital
+                world of tomorrow.
+              </p>
+              <button className="blog-btn">
+                <a href="#">Read More →</a>
+              </button>
+            </div>
+          </div>
+
+          <div className="blog-card">
+            <img src="src/images/gallery3.jpg" alt="Blog 3" />
+            <div className="blog-content">
+              <h3>Collaboration Matters</h3>
+              <p>
+                How working together helps us achieve better results for clients
+                and the community.
+              </p>
+              <button className="blog-btn">
+                {" "}
+                <a href="#">Read More →</a>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CONTACT SECTION */}
+<section className="contact-section">
+  <h2>Get In Touch</h2>
+  <p>We’d love to hear from you! Send us a message below.</p>
+
+  <form className="contact-form">
+    <input type="text" placeholder="Your Name" required />
+    <input type="email" placeholder="Your Email" required />
+    <textarea placeholder="Your Message" rows="5" required></textarea>
+    <button type="submit">Send Message</button>
+  </form>
+</section>
+
+
+      {/* FOOTER SECTION */}
+<footer className="footer">
+  <div className="footer-container">
+    <div className="footer-about">
+      <h3>About Our Company</h3>
+      <p>
+        We create innovative and user-friendly web experiences that connect people 
+        and businesses around the world. Let's build the future together.
+      </p>
+    </div>
+
+    <div className="footer-links">
+      <h3>Quick Links</h3>
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Services</a></li>
+        <li><a href="#">Blog</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </div>
+
+    <div className="footer-contact">
+      <h3>Contact Us</h3>
+      <p>Email: support@yourwebsite.com</p>
+      <p>Phone: +234 800 123 4567</p>
+      <p>Location: Lagos, Nigeria</p>
+    </div>
+  </div>
+
+  <div className="footer-bottom">
+    <p>© {new Date().getFullYear()} YourWebsite. All Rights Reserved.</p>
+  </div>
+</footer>
+
     </>
   );
 }
