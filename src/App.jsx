@@ -1,340 +1,391 @@
-import { useState } from "react";
-import Login from "./login";
-import "./form.css";
+import { useEffect, useState } from 'react'
+import { Delete, Divide, Equal, X } from 'lucide-react'
 
-const galleryImages = [
-  "src/images/gallery1.jpg",
-  "src/images/gallery2.jpg",
-  "src/images/gallery3.jpg",
-  "src/images/gallery4.jpg",
-  "src/images/gallery5.jpg",
-  "src/images/gallery6.jpg",
-];
+const buttons = [
+  { label: 'AC', type: 'clear', value: 'clear' },
+  { label: 'DEL', type: 'delete', value: 'delete' },
+  { label: '÷', type: 'operator', value: '/' },
+  { label: '×', type: 'operator', value: '*' },
+  { label: '7', type: 'number', value: '7' },
+  { label: '8', type: 'number', value: '8' },
+  { label: '9', type: 'number', value: '9' },
+  { label: '-', type: 'operator', value: '-' },
+  { label: '4', type: 'number', value: '4' },
+  { label: '5', type: 'number', value: '5' },
+  { label: '6', type: 'number', value: '6' },
+  { label: '+', type: 'operator', value: '+' },
+  { label: '1', type: 'number', value: '1' },
+  { label: '2', type: 'number', value: '2' },
+  { label: '3', type: 'number', value: '3' },
+  { label: '=', type: 'equals', value: '=' },
+  { label: '0', type: 'number zero', value: '0' },
+  { label: '.', type: 'number', value: '.' },
+]
 
-function ComplexApp() {
-  const [showLogin, setShowLogin] = useState(false);
-  const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  const prevImage = () => {
-    setCurrentIndex((prev) =>
-      prev === 0 ? galleryImages.length - 1 : prev - 1
-    );
-  };
-
-  const nextImage = () => {
-    setCurrentIndex((prev) =>
-      prev === galleryImages.length - 1 ? 0 : prev + 1
-    );
-  };
-
-  return (
-    <>
-      {/* LOGIN FORM */}
-      {showLogin && <Login closeLogin={() => setShowLogin(false)} />}
-
-      {/* HEADER */}
-      <header className="header">
-        <img className="mobile-logo" src="src/images/logo.png" alt="" />
-        <p className="hideOnMobile">Store Locator</p>
-        <p className="hideOnMobile">Sell on Website</p>
-
-        <div className="search-box">
-          <input type="search" placeholder="Search for products ..." />
-          <button>Search</button>
-        </div>
-
-        <p className="hideOnMobile">Help?</p>
-        <p className="hideOnMobile">Investors</p>
-        <button onClick={() => setShowLogin(true)} className="sign-btn">
-          Sign in
-        </button>
-
-        <img
-          className="menu-icon"
-          src="src/images/menu-icon.png"
-          alt="menu"
-          onClick={() => setSidebarOpen(true)}
-        />
-      </header>
-
-      {/* SIDEBAR */}
-      <nav className={`sidebar ${sidebarOpen ? "show" : ""}`}>
-        <img
-          className="close-icon"
-          src="src/images/close.png"
-          alt="close"
-          onClick={() => setSidebarOpen(false)}
-        />
-        <img className="logo" src="src/images/logo.png" alt="" />
-        <ul>
-          <li>
-            <a href="#">HOME</a>
-          </li>
-          <li>
-            <a href="http://localhost:3000/about" target="blank">ABOUT</a>
-          </li>
-          <li>
-            <a href="#">SERVICE</a>
-          </li>
-          <li>
-            <a href="#">BLOG</a>
-          </li>
-          <li>
-            <a href="#">CONTACT</a>
-          </li>
-        </ul>
-      </nav>
-
-      {/* HERO SECTION */}
-      <section className="hero">
-        <div className="hero-words">
-          <h1>Welcome to our world of creativity and innovation.</h1>
-          <p>
-            Building ideas that connect people so that your success starts right
-            here. Bringing simplicity and style to your digital space to
-            Explore, Create, and Inspire.
-          </p>
-          <h4>We make the web work for you.</h4>
-          <br />
-          <button className="hero-btn">Get Started</button>
-        </div>
-      </section>
-
-      {/* ABOUT US SECTION */}
-      <section className="about-us">
-        <div className="about-container">
-          <h2>About Us</h2>
-          <p>
-            We are a team of passionate creators dedicated to bringing ideas to
-            life through design and technology. Our goal is to craft meaningful
-            digital experiences that inspire, engage, and deliver real value.
-          </p>
-          <p>
-            With a focus on innovation, collaboration, and simplicity, we turn
-            challenges into opportunities — helping businesses and individuals
-            grow in the digital world.
-          </p>
-          <h4>Our Mission</h4>
-          <p>
-            To empower creativity and make technology accessible for everyone.
-          </p>
-          <button className="about-btn">Learn More</button>
-        </div>
-      </section>
-
-      {/* IMAGE GALLERY SECTION */}
-      <section className="gallery-carousel">
-        <div className="gallery-container">
-          <h2>Our Work</h2>
-          <p>Explore our latest projects one by one.</p>
-
-          <div className="carousel">
-            <button className="arrow left-arrow" onClick={prevImage}>
-              &#10094;
-            </button>
-
-            <img
-              src={galleryImages[currentIndex]}
-              alt={`Project ${currentIndex + 1}`}
-            />
-
-            <button className="arrow right-arrow" onClick={nextImage}>
-              &#10095;
-            </button>
-          </div>
-        </div>
-      </section>
-
-      {/* TESTIMONIALS SECTION */}
-      <section className="testimonials">
-        <h2>What Our Clients Say</h2>
-        <p>Hear from our satisfied clients and partners.</p>
-
-        <div className="testimonials-container">
-          <div className="testimonial-card">
-            <h4>Excellent Service!</h4>
-            <p>
-              "The team delivered outstanding results and exceeded our
-              expectations. Highly recommend!"
-            </p>
-            <span>- Jane Doe, CEO of Company</span>
-          </div>
-
-          <div className="testimonial-card">
-            <h4>Creative & Professional</h4>
-            <p>
-              "Their creativity and professionalism helped our project come to
-              life beautifully."
-            </p>
-            <span>- John Smith, Marketing Director</span>
-          </div>
-
-          <div className="testimonial-card">
-            <h4>Reliable & Efficient</h4>
-            <p>
-              "Always on time, always on point. They make working with them so
-              easy and enjoyable."
-            </p>
-            <span>- Sarah Lee, Entrepreneur</span>
-          </div>
-
-          <div className="testimonial-card">
-            <h4>Profits</h4>
-            <p>
-              "Always on time, always on point. They make working with them so
-              easy and enjoyable."
-            </p>
-            <span>- Sarah Lee, Entrepreneur</span>
-          </div>
-
-          <div className="testimonial-card">
-            <h4>Flexibility</h4>
-            <p>
-              "Always on time, always on point. They make working with them so
-              easy and enjoyable."
-            </p>
-            <span>- Sarah Lee, Entrepreneur</span>
-          </div>
-
-          <div className="testimonial-card">
-            <h4>Quick and time saver</h4>
-            <p>
-              "Always on time, always on point. They make working with them so
-              easy and enjoyable."
-            </p>
-            <span>- Sarah Lee, Entrepreneur</span>
-          </div>
-        </div>
-      </section>
-
-      {/* ACHIEVEMENTS SECTION */}
-      <section className="achievements-section">
-        <div className="achievements-inner">
-          <h2>Our Achievements</h2>
-          <div className="achievements-grid">
-            <div className="achievement">
-              <h3>250+</h3>
-              <p>Projects Completed</p>
-            </div>
-            <div className="achievement">
-              <h3>120+</h3>
-              <p>Happy Clients</p>
-            </div>
-            <div className="achievement">
-              <h3>50+</h3>
-              <p>Creative Members</p>
-            </div>
-            <div className="achievement">
-              <h3>10+</h3>
-              <p>Years of Experience</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* BLOG SECTION */}
-      <section className="blog-section">
-        <h2>Latest From Our Blog</h2>
-        <br />
-        <br />
-        <div className="blog-grid">
-          <div className="blog-card">
-            <img src="src/images/gallery5.jpg" alt="Blog 1" />
-            <div className="blog-content">
-              <h3>Designing with Purpose</h3>
-              <p>
-                Discover how design thinking transforms everyday products into
-                meaningful experiences.
-              </p>
-              <button className="blog-btn">
-                {" "}
-                <a href="#">Read More →</a>
-              </button>
-            </div>
-          </div>
-
-          <div className="blog-card">
-            <img src="src/images/gallery6.jpg" alt="Blog 2" />
-            <div className="blog-content">
-              <h3>Tech Meets Art</h3>
-              <p>
-                Explore how technology and creativity blend to shape the digital
-                world of tomorrow.
-              </p>
-              <button className="blog-btn">
-                <a href="#">Read More →</a>
-              </button>
-            </div>
-          </div>
-
-          <div className="blog-card">
-            <img src="src/images/gallery3.jpg" alt="Blog 3" />
-            <div className="blog-content">
-              <h3>Collaboration Matters</h3>
-              <p>
-                How working together helps us achieve better results for clients
-                and the community.
-              </p>
-              <button className="blog-btn">
-                {" "}
-                <a href="#">Read More →</a>
-              </button>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* CONTACT SECTION */}
-<section className="contact-section">
-  <h2>Get In Touch</h2>
-  <p>We’d love to hear from you! Send us a message below.</p>
-
-  <form className="contact-form">
-    <input type="text" placeholder="Your Name" required />
-    <input type="email" placeholder="Your Email" required />
-    <textarea placeholder="Your Message" rows="5" required></textarea>
-    <button type="submit">Send Message</button>
-  </form>
-</section>
-
-
-      {/* FOOTER SECTION */}
-<footer className="footer">
-  <div className="footer-container">
-    <div className="footer-about">
-      <h3>About Our Company</h3>
-      <p>
-        We create innovative and user-friendly web experiences that connect people 
-        and businesses around the world. Let's build the future together.
-      </p>
-    </div>
-
-    <div className="footer-links">
-      <h3>Quick Links</h3>
-      <ul>
-        <li><a href="#">Home</a></li>
-        <li><a href="#">Services</a></li>
-        <li><a href="#">Blog</a></li>
-        <li><a href="#">Contact</a></li>
-      </ul>
-    </div>
-
-    <div className="footer-contact">
-      <h3>Contact Us</h3>
-      <p>Email: support@yourwebsite.com</p>
-      <p>Phone: +234 800 123 4567</p>
-      <p>Location: Lagos, Nigeria</p>
-    </div>
-  </div>
-
-  <div className="footer-bottom">
-    <p>© {new Date().getFullYear()} YourWebsite. All Rights Reserved.</p>
-  </div>
-</footer>
-
-    </>
-  );
+const operatorSymbols = {
+  '/': '÷',
+  '*': '×',
+  '-': '-',
+  '+': '+',
 }
 
-export default ComplexApp;
+function App() {
+  const [currentValue, setCurrentValue] = useState('0')
+  const [previousValue, setPreviousValue] = useState('')
+  const [operator, setOperator] = useState(null)
+  const [waitingForOperand, setWaitingForOperand] = useState(false)
+  const [justCalculated, setJustCalculated] = useState(false)
+  const [error, setError] = useState(false)
+  const [pressedKey, setPressedKey] = useState(null)
+
+  const formatResult = (value) => {
+    if (!Number.isFinite(value)) {
+      return 'Cannot divide by zero'
+    }
+
+    const rounded = Number.parseFloat(value.toFixed(12))
+    const result = String(rounded)
+
+    if (result.length <= 14) {
+      return result
+    }
+
+    return rounded.toExponential(8)
+  }
+
+  const appendNumber = (number) => {
+    setError(false)
+
+    if (justCalculated) {
+      setCurrentValue(number === '.' ? '0.' : number)
+      setPreviousValue('')
+      setOperator(null)
+      setWaitingForOperand(false)
+      setJustCalculated(false)
+      return
+    }
+
+    if (waitingForOperand) {
+      setCurrentValue(number === '.' ? '0.' : number)
+      setWaitingForOperand(false)
+      return
+    }
+
+    if (number === '.' && currentValue.includes('.')) {
+      return
+    }
+
+    if (currentValue === '0' && number !== '.') {
+      setCurrentValue(number)
+      return
+    }
+
+    if (currentValue.length >= 14) {
+      return
+    }
+
+    setCurrentValue((value) => `${value}${number}`)
+  }
+
+  const chooseOperator = (nextOperator) => {
+    setError(false)
+
+    if (justCalculated) {
+      setPreviousValue(currentValue)
+      setOperator(nextOperator)
+      setWaitingForOperand(true)
+      setJustCalculated(false)
+      return
+    }
+
+    if (operator && waitingForOperand) {
+      setOperator(nextOperator)
+      return
+    }
+
+    if (operator && previousValue) {
+      const result = performCalculation(
+        Number(previousValue),
+        Number(currentValue),
+        operator,
+      )
+
+      if (result === null) {
+        setCurrentValue('Cannot divide by zero')
+        setPreviousValue('')
+        setOperator(null)
+        setWaitingForOperand(true)
+        setError(true)
+        return
+      }
+
+      setCurrentValue(result)
+      setPreviousValue(result)
+    } else {
+      setPreviousValue(currentValue)
+    }
+
+    setOperator(nextOperator)
+    setWaitingForOperand(true)
+  }
+
+  const performCalculation = (first, second, selectedOperator) => {
+    switch (selectedOperator) {
+      case '+':
+        return formatResult(first + second)
+      case '-':
+        return formatResult(first - second)
+      case '*':
+        return formatResult(first * second)
+      case '/':
+        if (second === 0) {
+          return null
+        }
+
+        return formatResult(first / second)
+      default:
+        return null
+    }
+  }
+
+  const calculate = () => {
+    if (!operator || waitingForOperand || error) {
+      return
+    }
+
+    const result = performCalculation(
+      Number(previousValue),
+      Number(currentValue),
+      operator,
+    )
+
+    if (result === null) {
+      setCurrentValue('Cannot divide by zero')
+      setPreviousValue('')
+      setOperator(null)
+      setWaitingForOperand(true)
+      setError(true)
+      return
+    }
+
+    setPreviousValue(
+      `${previousValue} ${operatorSymbols[operator]} ${currentValue} =`,
+    )
+    setCurrentValue(result)
+    setOperator(null)
+    setWaitingForOperand(false)
+    setJustCalculated(true)
+  }
+
+  const clearAll = () => {
+    setCurrentValue('0')
+    setPreviousValue('')
+    setOperator(null)
+    setWaitingForOperand(false)
+    setJustCalculated(false)
+    setError(false)
+  }
+
+  const deleteLast = () => {
+    if (error || justCalculated || waitingForOperand) {
+      return
+    }
+
+    if (currentValue.length === 1) {
+      setCurrentValue('0')
+      return
+    }
+
+    setCurrentValue((value) => value.slice(0, -1))
+  }
+
+  const handleButtonClick = (value) => {
+    if (/^\d$/.test(value) || value === '.') {
+      appendNumber(value)
+      return
+    }
+
+    if (['+', '-', '*', '/'].includes(value)) {
+      chooseOperator(value)
+      return
+    }
+
+    if (value === '=') {
+      calculate()
+      return
+    }
+
+    if (value === 'clear') {
+      clearAll()
+      return
+    }
+
+    if (value === 'delete') {
+      deleteLast()
+    }
+  }
+
+  const handleKeyboard = (event) => {
+    const { key } = event
+
+    if (/^\d$/.test(key) || key === '.') {
+      event.preventDefault()
+      setPressedKey(key)
+      handleButtonClick(key)
+      return
+    }
+
+    if (['+', '-', '*', '/'].includes(key)) {
+      event.preventDefault()
+      setPressedKey(key)
+      handleButtonClick(key)
+      return
+    }
+
+    if (key === 'Enter' || key === '=') {
+      event.preventDefault()
+      setPressedKey('=')
+      calculate()
+      return
+    }
+
+    if (key === 'Backspace') {
+      event.preventDefault()
+      setPressedKey('delete')
+      deleteLast()
+      return
+    }
+
+    if (key === 'Escape' || key.toLowerCase() === 'c') {
+      event.preventDefault()
+      setPressedKey('clear')
+      clearAll()
+    }
+  }
+
+  useEffect(() => {
+    window.addEventListener('keydown', handleKeyboard)
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyboard)
+    }
+  })
+
+  useEffect(() => {
+    if (!pressedKey) {
+      return
+    }
+
+    const timer = setTimeout(() => {
+      setPressedKey(null)
+    }, 120)
+
+    return () => clearTimeout(timer)
+  }, [pressedKey])
+
+  const getButtonIcon = (value) => {
+    if (value === 'delete') {
+      return <Delete className="h-4 w-4" aria-hidden="true" />
+    }
+
+    if (value === '/') {
+      return <Divide className="h-4 w-4" aria-hidden="true" />
+    }
+
+    if (value === '*') {
+      return <X className="h-4 w-4" aria-hidden="true" />
+    }
+
+    if (value === '=') {
+      return <Equal className="h-4 w-4" aria-hidden="true" />
+    }
+
+    return null
+  }
+
+  const displayValue = error ? 'Cannot divide by zero' : currentValue
+
+  return (
+    <main className="flex min-h-screen items-center justify-center bg-[#111315] px-4 py-6">
+      <section
+        aria-label="Interactive Calculator"
+        className="w-full max-w-[340px] overflow-hidden rounded-[28px] border border-[#36393d] bg-[#25282d] p-3.5 shadow-[0_20px_50px_rgba(0,0,0,0.45)] sm:p-4"
+      >
+        <div className="mb-3 flex items-center justify-between px-1.5">
+          <div className="flex items-center gap-1.5">
+            <span className="h-2.5 w-2.5 rounded-full bg-[#ff4b55]" />
+            <span className="h-2.5 w-2.5 rounded-full bg-[#ffc928]" />
+            <span className="h-2.5 w-2.5 rounded-full bg-[#5d6269]" />
+          </div>
+
+          <div className="flex h-8 w-8 items-center justify-center rounded-full bg-[#191b1f] text-[#d5d7da] shadow-inner">
+            <span className="text-sm">▦</span>
+          </div>
+        </div>
+
+        <div
+          className="mb-3 flex min-h-[120px] flex-col items-end justify-end overflow-hidden rounded-[20px] bg-[#2b2e33] px-4 py-4 text-right"
+          aria-live="polite"
+          aria-atomic="true"
+        >
+          <p className="mb-1.5 min-h-5 max-w-full truncate text-xs font-medium text-[#8f949b]">
+            {previousValue}
+          </p>
+
+          <p
+            className={`max-w-full overflow-hidden text-ellipsis whitespace-nowrap font-light tracking-tight ${
+              error
+                ? 'text-base text-[#ff6b6b]'
+                : 'text-3xl text-[#f2f3f4] sm:text-4xl'
+            }`}
+          >
+            {displayValue}
+          </p>
+        </div>
+
+        <div className="grid grid-cols-4 gap-2 sm:gap-2.5">
+          {buttons.map((button) => {
+            const isPressed =
+              pressedKey === button.value ||
+              (pressedKey === 'delete' && button.value === 'delete') ||
+              (pressedKey === 'clear' && button.value === 'clear')
+
+            const isOperator =
+              button.type === 'operator' || button.type === 'equals'
+
+            return (
+              <button
+                key={button.value}
+                type="button"
+                onClick={() => handleButtonClick(button.value)}
+                aria-label={
+                  button.value === 'delete'
+                    ? 'Delete last digit'
+                    : button.value === 'clear'
+                      ? 'Clear calculator'
+                      : button.label
+                }
+                data-value={button.value}
+                className={`flex min-h-[56px] items-center justify-center rounded-full border text-lg font-normal transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-[#ff9500] focus:ring-offset-2 focus:ring-offset-[#25282d] sm:min-h-[60px] ${
+                  button.value === '0' ? 'col-span-2' : ''
+                } ${
+                  button.type === 'clear'
+                    ? 'border-[#6a6e74] bg-[#666a70] text-white hover:bg-[#73777d]'
+                    : button.type === 'delete'
+                      ? 'border-[#6a6e74] bg-[#666a70] text-white hover:bg-[#73777d]'
+                      : isOperator
+                        ? 'border-[#ff9500] bg-[#ff9500] text-white hover:bg-[#ffab2e]'
+                        : 'border-[#555a60] bg-[#4b4f55] text-white hover:bg-[#585d64]'
+                } ${isPressed ? 'scale-95' : 'active:scale-95'}`}
+              >
+                {getButtonIcon(button.value) || button.label}
+              </button>
+            )
+          })}
+        </div>
+      </section>
+    </main>
+  )
+}
+
+export default App
